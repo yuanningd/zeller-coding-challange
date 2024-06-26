@@ -4,21 +4,7 @@ import user from '@testing-library/user-event'
 import Radio from './index'
 
 describe('<Radio />', () => {
-  it('calls onChange when clicked', () => {
-    const handleChange = jest.fn()
-    render(
-      <Radio value="test" onChange={handleChange}>
-        test
-      </Radio>,
-    )
-    const radioElement = screen.getByRole('radio', { name: 'test' })
-    user.click(radioElement)
-
-    expect(radioElement).toBeChecked()
-    expect(handleChange).toHaveBeenCalled()
-  })
-
-  it('works as an uncontrolled component', () => {
+  it('works as an uncontrolled component when not in a radio group or not passed checked', () => {
     render(
       <>
         <Radio value="option1" defaultChecked name="group">
@@ -39,5 +25,19 @@ describe('<Radio />', () => {
     user.click(radioElement2)
     expect(radioElement2).toBeChecked()
     expect(radioElement1).not.toBeChecked()
+  })
+
+  it('calls onChange when clicked not in a radio group', () => {
+    const handleChange = jest.fn()
+    render(
+      <Radio value="test" onChange={handleChange}>
+        test
+      </Radio>,
+    )
+    const radioElement = screen.getByRole('radio', { name: 'test' })
+    user.click(radioElement)
+
+    expect(radioElement).toBeChecked()
+    expect(handleChange).toHaveBeenCalled()
   })
 })
