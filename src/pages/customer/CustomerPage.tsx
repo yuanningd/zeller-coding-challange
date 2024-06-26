@@ -1,6 +1,6 @@
 import React, { Suspense, useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
-import CustomerFilter from './CustomerFilter'
+import CustomerSelector from './CustomerSelector'
 import CustomerList from './CustomerList'
 import Divider from '../../components/cores/Divider/Divider'
 import BlankLayout from '../../components/layouts/BlankLayout'
@@ -12,7 +12,7 @@ const CustomerPage = () => {
 
   return (
     <BlankLayout>
-      <CustomerFilter userType={userType} onUserTypeChange={setUserType} />
+      <CustomerSelector userType={userType} onUserTypeChange={setUserType} />
       <Divider />
       <ErrorBoundary fallback={<div>Something went wrong</div>}>
         <Suspense fallback={<p>Loading...</p>}>

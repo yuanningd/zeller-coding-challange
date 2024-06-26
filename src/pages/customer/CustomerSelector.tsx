@@ -9,7 +9,7 @@ interface CustomerFilterProps {
   onUserTypeChange: (value: UserType) => void
 }
 
-const CustomerFilter = ({
+const CustomerSelector = ({
   userType,
   onUserTypeChange,
 }: CustomerFilterProps) => {
@@ -28,4 +28,4 @@ const CustomerFilter = ({
   )
 }
 
-export default CustomerFilter
+export default CustomerSelector
