@@ -89,8 +89,22 @@ similar to how error boundaries work.
 In server components, Suspense can offer even more advantages. However, engineers should be cautious of potential issues
 when adopting new technologies. For instance, useSuspenseQuery suspends while data is being fetched, which can cause a "
 waterfall" effect if multiple components in a tree use it. Each query may depend on the previous one to complete before
-it starts fetching. Luckily, This can be mitigated by fetching data with useBackgroundQuery and reading it with useReadQuery.
+it starts fetching. Luckily, This can be mitigated by fetching data with useBackgroundQuery and reading it with
+useReadQuery.
 
 ## Things to Improve
-1. Too many magic strings in CSS
-2. msw can be a better way for testing
+
+### Minimize Magic Strings in CSS
+
+The current implementation contains several magic strings in the CSS, such as color values and padding sizes. Using
+magic strings can make the code harder to maintain and less consistent. Utilize a Design System and use a Theme Provider
+to manage these values. By defining
+constants for colors, spacing, and other styles, you can ensure consistency across the application and simplify future
+changes.
+
+### Improved Testing with MSW
+
+The current testing strategy could be enhanced by using Mock Service Worker (MSW) instead of mockProvider. MSW allows
+for API mocking at the network level, which means your tests can interact with mocked endpoints in a way that closely
+mimics real network interactions. This approach not only makes the tests more reliable but also ensures that they are
+closer to real-world scenarios.
