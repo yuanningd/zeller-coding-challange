@@ -5,7 +5,7 @@ import { RadioGroupContainer } from './RadioGroup.styles'
 interface RadioGroupProps {
   value: string
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-  'aria-labelledby': string
+  'aria-labelledby'?: string
   disabled?: boolean
   buttonStyle?: 'outline' | 'solid'
   optionType?: 'default' | 'button'

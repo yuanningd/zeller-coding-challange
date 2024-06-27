@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react'
-import RadioGroup from '../../components/cores/RadioGroup'
+import RadioGroup from '../../components/cores/Radio/group'
 import Radio from '../../components/cores/Radio'
 import Title from '../../components/cores/Title'
 import { UserType } from './CustomerPage'

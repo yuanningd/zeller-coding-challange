@@ -1,5 +1,5 @@
 import React, { ChangeEvent, InputHTMLAttributes, useContext } from 'react'
-import { RadioGroupContext } from '../RadioGroup/RadioGroupContext'
+import { RadioGroupContext } from './group/RadioGroupContext'
 import { RadioWrapper, RadioInput } from './Radio.styles'
 
 interface RadioProps
