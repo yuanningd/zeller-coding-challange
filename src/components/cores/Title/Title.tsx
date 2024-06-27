@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 interface TitleProps {
   color?: string
-  size?: string
   align?: 'left' | 'center' | 'right'
   tag: 'h1' | 'h2' | 'h3'
   children: ReactNode
