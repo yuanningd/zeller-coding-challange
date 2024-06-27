@@ -20,7 +20,11 @@ const CustomerSelector = ({
   return (
     <>
       <Title tag="h2">User Types</Title>
-      <RadioGroup value={userType} onChange={handleChange}>
+      <RadioGroup
+        value={userType}
+        onChange={handleChange}
+        aria-labelledby="userTypeSelect"
+      >
         <Radio value="Admin">Admin</Radio>
         <Radio value="Manager">Manager</Radio>
       </RadioGroup>

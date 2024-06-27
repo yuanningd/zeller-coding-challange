@@ -1,10 +1,11 @@
 import React, { ReactNode } from 'react'
 import { RadioGroupContext } from './RadioGroupContext'
-import { RadioGroupWrapper } from './RadioGroup.styles'
+import { RadioGroupContainer } from './RadioGroup.styles'
 
 interface RadioGroupProps {
   value: string
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  'aria-labelledby': string
   disabled?: boolean
   buttonStyle?: 'outline' | 'solid'
   optionType?: 'default' | 'button'
@@ -15,7 +16,7 @@ interface RadioGroupProps {
 const RadioGroup = ({ value, onChange, children }: RadioGroupProps) => {
   return (
     <RadioGroupContext.Provider value={{ selectedValue: value, onChange }}>
-      <RadioGroupWrapper>{children}</RadioGroupWrapper>
+      <RadioGroupContainer role="radiogroup">{children}</RadioGroupContainer>
     </RadioGroupContext.Provider>
   )
 }

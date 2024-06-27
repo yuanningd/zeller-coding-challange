@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  Wrapper,
+  Container,
   Avatar,
   CustomerInfo,
   CustomerName,
@@ -13,13 +13,13 @@ interface Customer {
 }
 
 const CustomerProfile = ({ customer }: { customer: Partial<Customer> }) => (
-  <Wrapper>
+  <Container>
     <Avatar>{customer.name?.charAt(0)}</Avatar>
     <CustomerInfo>
       <CustomerName>{customer.name}</CustomerName>
       <CustomerRole>{customer.role}</CustomerRole>
     </CustomerInfo>
-  </Wrapper>
+  </Container>
 )
 
 export default CustomerProfile
