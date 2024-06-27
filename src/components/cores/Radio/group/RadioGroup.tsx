@@ -9,13 +9,21 @@ interface RadioGroupProps {
   disabled?: boolean
   buttonStyle?: 'outline' | 'solid'
   optionType?: 'default' | 'button'
+  checkedBackgroundColor?: string
   size?: 'large' | 'middle' | 'small'
   children: ReactNode
 }
 
-const RadioGroup = ({ value, onChange, children }: RadioGroupProps) => {
+const RadioGroup = ({
+  value,
+  onChange,
+  checkedBackgroundColor,
+  children,
+}: RadioGroupProps) => {
   return (
-    <RadioGroupContext.Provider value={{ selectedValue: value, onChange }}>
+    <RadioGroupContext.Provider
+      value={{ selectedValue: value, onChange, checkedBackgroundColor }}
+    >
       <RadioGroupContainer role="radiogroup">{children}</RadioGroupContainer>
     </RadioGroupContext.Provider>
   )

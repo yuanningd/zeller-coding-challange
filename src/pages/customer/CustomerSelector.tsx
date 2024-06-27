@@ -24,6 +24,7 @@ const CustomerSelector = ({
         value={userType}
         onChange={handleChange}
         aria-labelledby="userTypeSelect"
+        checkedBackgroundColor="#e6f7ff"
       >
         <Radio value="Admin">Admin</Radio>
         <Radio value="Manager">Manager</Radio>
