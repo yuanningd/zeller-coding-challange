@@ -18,7 +18,6 @@ export const Avatar = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  font-weight: bold;
   margin-right: 10px;
 `
 

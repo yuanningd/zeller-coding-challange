@@ -1,46 +1,96 @@
-# Getting Started with Create React App
+# Code challenge for Frontend Developer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Overview
 
-## Available Scripts
+This project is part of a coding challenge to build a React application that fetches and displays customer data using
+GraphQL. The application includes a customer list with filtering capabilities based on user roles, styled using
+styled-components.
 
-In the project directory, you can run:
+![ui.png](ui.png)
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To install and set up the project, follow these steps:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. Install the dependencies:
 
-### `npm test`
+```bash
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Generate the GraphQL types:
 
-### `npm run build`
+```bash
+npm run compile
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Start the development server:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This will start the application on http://localhost:3000.
 
-### `npm run eject`
+## Test Coverage
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![test_coverage.png](test_coverage.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Decisions and Trade-offs
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Component API Design
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+I have extracted many reusable components under components/core. In real projects, these would typically be replaced by
+a design system or a component library. When extracting these components, apart from adhering to a11y standards,
+designing the API is an important consideration. The design of the API requires a trade-off between flexibility and
+consistency.
 
-## Learn More
+For example, my Radio component's props interface RadioProps extends Omit<InputHTMLAttributes<HTMLLabelElement>, '
+onChange'>, providing great flexibility:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```tsx
+interface RadioProps extends Omit<InputHTMLAttributes<HTMLLabelElement>, 'onChange'> {
+  value?: string;
+  defaultChecked?: boolean;
+  disabled?: boolean;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  checked?: boolean;
+}
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This design is common in public component libraries (like MUI) because the library designers do not know how users will
+use their components. However, for a mature design system, this kind of API design can lead to unpredictable outcomes,
+weakening consistency. In this scenario, a strict and opinionated API is often better. For example, my Radio Group
+component's props are defined as follows:
+
+```tsx
+interface RadioGroupProps {
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
+  buttonStyle?: 'outline' | 'solid';
+  optionType?: 'default' | 'button';
+  size?: 'large' | 'middle' | 'small';
+  children: ReactNode;
+}
+```
+
+(Some props are not yet implemented and are just for demonstrating the API design.)
+
+The more mature a design system is, the more confident it might be in using a stricter API. However, in the early stages
+of design, retaining flexibility can also be a good choice.
+
+### Using Suspense with Apollo
+
+Regarding the use of Suspense, Apollo's useSuspenseQuery can be effectively paired with Suspense to separate loading
+logic from business logic. This approach aligns with the clean code principle of separating cross-cutting concerns,
+similar to how error boundaries work.
+
+In server components, Suspense can offer even more advantages. However, engineers should be cautious of potential issues
+when adopting new technologies. For instance, useSuspenseQuery suspends while data is being fetched, which can cause a "
+waterfall" effect if multiple components in a tree use it. Each query may depend on the previous one to complete before
+it starts fetching. Luckily, This can be mitigated by fetching data with useBackgroundQuery and reading it with useReadQuery.
+
+## Things to Improve
+1. Too many magic strings in CSS
+2. msw can be a better way for testing
