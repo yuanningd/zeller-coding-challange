@@ -63,11 +63,17 @@ describe('CustomerPage Component', () => {
       </MockedProvider>,
     )
 
-    expect(await screen.findByText('Admin User 1')).toBeVisible()
-    expect(screen.getByText('Admin User 2')).toBeVisible()
+    expect(
+      await screen.findByRole('listitem', { name: 'Admin User 1' }),
+    ).toBeVisible()
+    expect(screen.getByRole('listitem', { name: 'Admin User 2' })).toBeVisible()
 
-    expect(screen.queryByText('Manager User 1')).not.toBeInTheDocument()
-    expect(screen.queryByText('Manager User 2')).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('listitem', { name: 'Manager User 1' }),
+    ).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('listitem', { name: 'Manager User 2' }),
+    ).not.toBeInTheDocument()
   })
 
   it('fetches and displays Manager users when selected', async () => {
@@ -79,10 +85,18 @@ describe('CustomerPage Component', () => {
 
     user.click(screen.getByRole('radio', { name: 'Manager' }))
 
-    expect(await screen.findByText('Manager User 1')).toBeVisible()
-    expect(screen.getByText('Manager User 2')).toBeVisible()
+    expect(
+      await screen.findByRole('listitem', { name: 'Manager User 1' }),
+    ).toBeVisible()
+    expect(
+      screen.getByRole('listitem', { name: 'Manager User 2' }),
+    ).toBeVisible()
 
-    expect(screen.queryByText('Admin User 1')).not.toBeInTheDocument()
-    expect(screen.queryByText('Admin User 2')).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('listitem', { name: 'Admin User 1' }),
+    ).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('listitem', { name: 'Admin User 2' }),
+    ).not.toBeInTheDocument()
   })
 })
