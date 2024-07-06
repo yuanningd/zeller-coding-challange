@@ -13,7 +13,7 @@ interface Customer {
 }
 
 const CustomerProfile = ({ customer }: { customer: Partial<Customer> }) => (
-  <Container>
+  <Container role="listitem" aria-label={customer.name ? customer.name : ''}>
     <Avatar>{customer.name?.charAt(0)}</Avatar>
     <CustomerInfo>
       <CustomerName>{customer.name}</CustomerName>

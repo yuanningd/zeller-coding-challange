@@ -26,10 +26,14 @@ const CustomerList = ({ userType }: { userType: UserType }) => {
   return (
     <>
       <Title tag="h2">{`${userType} Users`}</Title>
-      {filteredCustomers?.map(
-        (customer) =>
-          customer && <CustomerProfile key={customer.id} customer={customer} />,
-      )}
+      <div role="list">
+        {filteredCustomers?.map(
+          (customer) =>
+            customer && (
+              <CustomerProfile key={customer.id} customer={customer} />
+            ),
+        )}
+      </div>
     </>
   )
 }
