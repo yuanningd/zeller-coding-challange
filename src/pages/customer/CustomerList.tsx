@@ -26,7 +26,7 @@ const CustomerList = ({ userType }: { userType: UserType }) => {
   return (
     <>
       <Title tag="h2">{`${userType} Users`}</Title>
-      <div role="list">
+      <div role="list" aria-label={`${userType} list`}>
         {filteredCustomers?.map(
           (customer) =>
             customer && (

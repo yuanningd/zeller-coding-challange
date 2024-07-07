@@ -6,7 +6,6 @@ export const RadioWrapper = styled.div`
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
-  width: 100%;
   transition: background-color 0.3s;
 `
 
